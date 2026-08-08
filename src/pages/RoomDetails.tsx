@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-
+import { useNavigate } from "react-router-dom";
 function RoomDetails() {
+
+const navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -164,7 +166,12 @@ console.log("IMAGE URL:", room.image_url);
   >
     📞 Call
   </a>
-
+<button
+  onClick={() => navigate(`/chat?owner=${room?.owner_id}&room=${room?.id}`)}
+  className="w-full text-center bg-blue-600 text-white py-4 rounded-xl font-semibold hover:bg-blue-700 transition mb-3"
+>
+  💬 Chat with Owner
+</button>
   <a
     href={`https://wa.me/91${room?.mobile}`}
     target="_blank"
